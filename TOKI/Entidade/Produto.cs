@@ -6,6 +6,7 @@ namespace TOKI.Entidade
 {
     class Produto
     {
+        private int IdProduto;
         private string descricao;
         private float saldo;
         private int codigoBarra;
@@ -13,7 +14,7 @@ namespace TOKI.Entidade
         private string tipo;
         private double preco;
 
-        public Produto(string descri, float saldo, int codBarra, TipoUnidade unidade, string tipoProduto, double preco)
+        public Produto(string descri, float saldo, int codBarra, TipoUnidade unidade, string tipoProduto, double preco, int IdProduto)
         {
             this.descricao = descri;
             this.saldo = saldo;
@@ -21,6 +22,7 @@ namespace TOKI.Entidade
             this.unidade = unidade;
             this.tipo = tipoProduto;
             this.preco = preco;
+            this.IdProduto = IdProduto;
         }
 
         public bool saidaSaldo(float v)
@@ -101,6 +103,14 @@ namespace TOKI.Entidade
         {
             return this.preco;
         }
-        
+
+        public int GetId() {
+            return this.IdProduto;
+        }
+
+        public void SetId(int IdProduto) {
+            this.IdProduto = IdProduto;
+        }
+
     }
 }
