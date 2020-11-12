@@ -24,18 +24,14 @@ namespace TOKI.Entidade {
             this.usuario = usuario;
         }
 
-        public string descreveMovimento() {
-            return "Entrada ou saída ? "
-                + movimento +
-                "Produto: " +
-                produto +
-                "Data de processamento: " +
-                data +
-                almoxarifado +
-                "quantidade: " +
-                quantidade +
-                "Usuário: " +
-                usuario;
+        public virtual string descreveMovimento() {
+            return
+                "Movimento: " + movimento
+                + "Produto: " + produto.getdrescri()
+                + "/nData de processamento: " + data.ToString()
+                + "/nAlmoxarifado: " + almoxarifado.GetNome() 
+                + "/nquantidade: " + quantidade 
+                + "/nUsuário: " + usuario.nome;
         }
 
 

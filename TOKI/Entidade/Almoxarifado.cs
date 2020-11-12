@@ -7,6 +7,7 @@ namespace TOKI.Entidade {
         private string nome;
         private string endereco;
         public List<Produto> listProduto = new List<Produto>();
+        private List<MovimentoEstoque> listMovimento = new List<MovimentoEstoque>();
 
         public Almoxarifado() {
         }
@@ -15,6 +16,11 @@ namespace TOKI.Entidade {
             this.nome = nome;
             this.endereco = endereco;
             this.listProduto = listProduto;
+        }
+
+        public void AddMovimento(MovimentoEstoque me)
+        {
+            this.listMovimento.Add(me);
         }
 
         public string GetNome() {
