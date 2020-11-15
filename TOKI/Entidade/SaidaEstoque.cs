@@ -17,14 +17,6 @@ namespace TOKI.Entidade
 
         }
 
-        public override bool Finalizar()
-        {
-            this.produto.saidaSaldo(this.quantidade);
-            this.almoxarifado.AddMovimento(this);
-
-            return true;
-        }
-
         public override string descreveMovimento()
         {
             return
@@ -35,6 +27,14 @@ namespace TOKI.Entidade
                 + "/nAlmoxarifado: " + almoxarifado.GetNome()
                 + "/nquantidade: " + quantidade
                 + "/nUsuário: " + usuario.nome;
+        }
+
+        public override bool Finalizar()
+        {
+            this.produto.saidaSaldo(this.quantidade);
+            this.almoxarifado.AddMovimento(this);
+
+            return true;
         }
     }
 }

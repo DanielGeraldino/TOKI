@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace TOKI.Entidade {
-    class MovimentoEstoque {
+    abstract class MovimentoEstoque {
         public int movimento { get; set; }
         public Produto produto { get; set; }
         public DateTime data { get; set; }
