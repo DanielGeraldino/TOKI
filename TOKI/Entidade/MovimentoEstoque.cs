@@ -24,6 +24,8 @@ namespace TOKI.Entidade {
             this.usuario = usuario;
         }
 
+        public abstract bool Finalizar();
+
         public virtual string descreveMovimento() {
             return
                 "Movimento: " + movimento

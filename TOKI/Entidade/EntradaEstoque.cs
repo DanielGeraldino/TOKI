@@ -20,10 +20,12 @@ namespace TOKI.Entidade
 
         }
 
-        public void finalizar()
+        public override bool Finalizar()
         {
             this.produto.entradaSaldo(this.quantidade);
             this.almoxarifado.AddMovimento(this);
+
+            return true;
         }
 
         public override string descreveMovimento()

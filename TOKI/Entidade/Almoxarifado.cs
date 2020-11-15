@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TOKI.Interface;
 
 namespace TOKI.Entidade {
-    class Almoxarifado {
+    class Almoxarifado : IEstoque {
         private string nome;
         private string endereco;
         public List<Produto> listProduto = new List<Produto>();
@@ -48,6 +49,55 @@ namespace TOKI.Entidade {
                 }
             }
             return saldo;
+
+        }
+
+        public Produto pesquisar(string descricao)
+        {
+
+            foreach(var produto in listProduto)
+            {
+                if(produto.getdrescri() == descricao)
+                {
+                    return produto;
+                }
+            }
+
+            return null;
+
+        }
+
+
+        public bool saida(int movimento, Produto produto, DateTime data, Usuario usuario, float quantidade)
+        {
+
+            MovimentoEstoque saida = new SaidaEstoque(
+                movimento, 
+                produto, 
+                data, 
+                this, 
+                usuario, 
+                quantidade
+                );
+
+            return saida.Finalizar();
+            
+        }
+
+        public bool entrada(int movimento, Produto produto, DateTime data, Usuario usuario, float quantidade, Fornecedor fornecedor)
+        {
+
+            MovimentoEstoque entrada = new EntradaEstoque(
+                movimento,
+                produto,
+                data,
+                this,
+                usuario,
+                quantidade,
+                fornecedor
+                );
+
+            return entrada.Finalizar();
 
         }
     }
