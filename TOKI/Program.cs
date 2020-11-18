@@ -10,6 +10,8 @@ namespace TOKI
             Tela t = new Tela();
 
             t.TelaMenu();
+
+            t.TelaCadastraFornec();
         }
     }
 }

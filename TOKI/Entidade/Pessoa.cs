@@ -12,5 +12,7 @@ namespace TOKI.Entidade
         public string cidade { get; set; }
         public string estado { get; set; }
         public int contato { get; set; }
+
+        public string telefone { get; set; }
     }
 }

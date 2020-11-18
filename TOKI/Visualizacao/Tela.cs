@@ -81,6 +81,10 @@ namespace TOKI.Visualizacao
 
         public bool TelaEntrada()
         {
+            Console.WriteLine("Informe o fornecedor: ");
+            string fornecedor = Console.ReadLine();
+            Console.WriteLine("Informe o produto: ");
+            string produto = Console.ReadLine();
             return false;
         }
 
@@ -96,6 +100,21 @@ namespace TOKI.Visualizacao
 
         public bool TelaCadastraFornec()
         {
+            Console.WriteLine("Informe o nome do fornecedor: ");
+            string nome = Console.ReadLine();
+            Console.WriteLine("Informe o CNPJ do fornecedor: ");
+            int cnpj = int.Parse(Console.ReadLine());
+            Console.WriteLine("Informe um telefone para contato: ");
+            string telefone = Console.ReadLine();
+            Console.WriteLine("Informe um e-mail para cadastro: ");
+            string email = Console.ReadLine();
+            Console.WriteLine("Informe o endereço do fornecedor: ");
+            string endereco = Console.ReadLine();
+            Console.WriteLine("Informe a cidade: ");
+            string cidade = Console.ReadLine();
+            Console.WriteLine("Informe o estado: ");
+            string estado = Console.ReadLine();
+
             return false;
         }
     }
