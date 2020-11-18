@@ -1,4 +1,5 @@
 ﻿using System;
+using TOKI.Visualizacao;
 
 namespace TOKI
 {
@@ -6,7 +7,9 @@ namespace TOKI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Tela t = new Tela();
+
+            t.TelaMenu();
         }
     }
 }
