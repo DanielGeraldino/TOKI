@@ -156,17 +156,36 @@ namespace TOKI.Visualizacao
 
         public bool TelaEntrada()
         {
+            Console.Write("Digite o movimento: ");
+            int mov = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o nome do produto: ");
+            Produto p = almoxarifado.pesquisar(Console.ReadLine());
+
+            Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
+            DateTime data = Convert.ToDateTime(Console.ReadLine());
+
+            Console.Write("Digite a quantidade de entrada: ");
+            float quantidade = float.Parse(Console.ReadLine());
+
             Console.WriteLine("Informe o fornecedor: ");
-            string fornecedor = Console.ReadLine();
-            Console.WriteLine("Informe o produto: ");
-            string produto = Console.ReadLine();
+            Fornecedor fornecedor = almoxarifado.pesquisarFornec(Console.ReadLine());
 
-            //almoxarifado.addProd(fornecedor, produto);
+            if (p != null) {
+                if (almoxarifado.entrada(mov, p, data, null, quantidade, fornecedor)) {
+                    Console.WriteLine("Movimento registrado");
+                    Console.ReadKey();
+                    return true;
+                }
+                else {
+                    Console.WriteLine("Produto não encontrado!");
+                    Console.ReadKey();
+                    return false;
+                }
+            }
 
-            Console.WriteLine("Entrada realizada!");
             Console.ReadKey();
-
-            return true;
+            return false;
         }
 
         public bool TelaSaida()

@@ -28,11 +28,6 @@ namespace TOKI.Entidade
             this.IdProduto = IdProduto;
         }
 
-        public Produto(string fornecedor, string produto) {
-            Fornecedor = fornecedor;
-            Produto = produto;
-        }
-
         public void printProduto()
         {
             Console.WriteLine(

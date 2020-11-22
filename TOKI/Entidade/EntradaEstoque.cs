@@ -24,12 +24,13 @@ namespace TOKI.Entidade
         {
             return
                 "Movimento: " + movimento
-                + "/nTipo: Entrada" 
-                + "/nProduto: " + produto.getdrescri()
-                + "/nData de processamento: " + data.ToString()
-                + "/nAlmoxarifado: " + almoxarifado.GetNome()
-                + "/nquantidade: " + quantidade
-                + "/nUsuário: " + usuario.nome;
+                + "\nTipo: Entrada"
+                + "\nProduto: " + produto.getdrescri()
+                + "\nData de processamento: " + data.ToString()
+                + "\nAlmoxarifado: " + almoxarifado.GetNome()
+                + "\nquantidade: " + quantidade
+                + "\n------------------------------------------------------------";
+                //+ "/nUsuário: " + usuario.nome;
         }
 
         public override bool Finalizar()
