@@ -161,7 +161,7 @@ namespace TOKI.Visualizacao
             Console.WriteLine("Informe o produto: ");
             string produto = Console.ReadLine();
 
-            almoxarifado.addProd(fornecedor, produto);
+            //almoxarifado.addProd(fornecedor, produto);
 
             Console.WriteLine("Entrada realizada!");
             Console.ReadKey();
@@ -171,6 +171,35 @@ namespace TOKI.Visualizacao
 
         public bool TelaSaida()
         {
+            Console.Write("Digite o movimento: ");
+            int mov = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o nome do produto: ");
+            Produto p = almoxarifado.pesquisar(Console.ReadLine());
+
+            Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
+            DateTime data = Convert.ToDateTime(Console.ReadLine());
+
+            Console.Write("Digite a quantidade de saida: ");
+            float quantidade = float.Parse(Console.ReadLine());
+
+            if(p != null)
+            {
+                if(almoxarifado.saida(mov, p, data, null, quantidade))
+                {
+                    Console.WriteLine("Movimento registrado");
+                    Console.ReadKey();
+                    return true;
+                } else
+                {
+                    Console.WriteLine("Saldo insuficiente!");
+                    Console.ReadKey();
+                    return false;
+                }
+            }
+
+            Console.WriteLine("Produto não encontrado!");
+            Console.ReadKey();
             return false;
         }
 

@@ -31,10 +31,10 @@ namespace TOKI.Entidade {
                 "------------------------------------------------------------"
                 + "Movimento: " + movimento
                 + "Produto: " + produto.getdrescri()
-                + "/nData de processamento: " + data.ToString()
-                + "/nAlmoxarifado: " + almoxarifado.GetNome()
-                + "/nquantidade: " + quantidade
-                + "/nUsuário: " + usuario.nome
+                + "\nData de processamento: " + data.ToString()
+                + "\nAlmoxarifado: " + almoxarifado.GetNome()
+                + "\nquantidade: " + quantidade
+                //+ "\nUsuário: " + usuario.nome
                 + "------------------------------------------------------------";
         }
 

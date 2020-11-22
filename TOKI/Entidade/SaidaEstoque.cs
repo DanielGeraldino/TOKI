@@ -20,21 +20,27 @@ namespace TOKI.Entidade
         public override string descreveMovimento()
         {
             return
-                "Movimento: " + movimento
-                + "/nTipo: Saida"
-                + "/nProduto: " + produto.getdrescri()
-                + "/nData de processamento: " + data.ToString()
-                + "/nAlmoxarifado: " + almoxarifado.GetNome()
-                + "/nquantidade: " + quantidade
-                + "/nUsuário: " + usuario.nome;
+                "------------------------------------------------------------"
+                +"\nMovimento: " + movimento
+                + "\nTipo: Saida"
+                + "\nProduto: " + produto.getdrescri()
+                + "\nData de processamento: " + data.ToString()
+                + "\nAlmoxarifado: " + almoxarifado.GetNome()
+                + "\nquantidade: " + quantidade
+                //+ "/nUsuário: " + usuario.nome;
+                +"\n------------------------------------------------------------";
         }
 
         public override bool Finalizar()
         {
-            this.produto.saidaSaldo(this.quantidade);
-            this.almoxarifado.AddMovimento(this);
+            if(this.produto.saidaSaldo(this.quantidade))
+            {
+                this.almoxarifado.AddMovimento(this);
+                return true;
+            }
 
-            return true;
+            return false;
+            
         }
     }
 }

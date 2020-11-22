@@ -15,7 +15,7 @@ namespace TOKI.Entidade
         private double preco;
 
         public string Fornecedor { get; set; }
-        public string Produto { get; set; }
+        public string produto { get; set; }
 
         public Produto(string descri, float saldo, int codBarra, TipoUnidade unidade, string tipoProduto, double preco, int IdProduto)
         {
