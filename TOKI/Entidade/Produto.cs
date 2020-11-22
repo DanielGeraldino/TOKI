@@ -14,6 +14,9 @@ namespace TOKI.Entidade
         private string tipo;
         private double preco;
 
+        public string Fornecedor { get; set; }
+        public string Produto { get; set; }
+
         public Produto(string descri, float saldo, int codBarra, TipoUnidade unidade, string tipoProduto, double preco, int IdProduto)
         {
             this.descricao = descri;
@@ -23,6 +26,11 @@ namespace TOKI.Entidade
             this.tipo = tipoProduto;
             this.preco = preco;
             this.IdProduto = IdProduto;
+        }
+
+        public Produto(string fornecedor, string produto) {
+            Fornecedor = fornecedor;
+            Produto = produto;
         }
 
         public void printProduto()

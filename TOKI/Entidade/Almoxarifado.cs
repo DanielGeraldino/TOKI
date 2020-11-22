@@ -31,6 +31,11 @@ namespace TOKI.Entidade {
             this.listProduto.Add(a);
         }
 
+        public void addProd (string fornecedor, string produto) {
+            Produto prod = new Produto(fornecedor, produto);
+            this.listProduto.Add(prod);
+        }
+
         public void printProdutos()
         {
             foreach(var produto in this.listProduto)

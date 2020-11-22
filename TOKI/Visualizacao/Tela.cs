@@ -160,7 +160,13 @@ namespace TOKI.Visualizacao
             string fornecedor = Console.ReadLine();
             Console.WriteLine("Informe o produto: ");
             string produto = Console.ReadLine();
-            return false;
+
+            almoxarifado.addProd(fornecedor, produto);
+
+            Console.WriteLine("Entrada realizada!");
+            Console.ReadKey();
+
+            return true;
         }
 
         public bool TelaSaida()
