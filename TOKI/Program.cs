@@ -1,4 +1,5 @@
 ﻿using System;
+using TOKI.Entidade;
 using TOKI.Visualizacao;
 
 namespace TOKI
@@ -7,11 +8,20 @@ namespace TOKI
     {
         static void Main(string[] args)
         {
-            Tela t = new Tela();
+
+            Almoxarifado a = new Almoxarifado("teste", "teste end");
+            Tela t = new Tela(a);
 
             t.TelaMenu();
 
             t.TelaCadastraFornec();
+
+            
+            /*
+
+            a.addItem("teste", 123456, TipoUnidade.UNIDADE, "limpeza", 18.0, 1);
+
+            a.printProdutos();*/
         }
     }
 }

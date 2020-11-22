@@ -25,6 +25,16 @@ namespace TOKI.Entidade
             this.IdProduto = IdProduto;
         }
 
+        public void printProduto()
+        {
+            Console.WriteLine(
+                  "id: " + GetId() + " | "
+                + getdrescri() + " | "
+                + "Saldo: " + getSaldo() + " " + unidade + " | "
+                + "valor unitario: " + getPreco()
+                );
+        }
+
         public bool saidaSaldo(float v)
         {
             float novoSaldo = this.getSaldo() - v;

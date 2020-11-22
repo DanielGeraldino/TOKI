@@ -13,10 +13,23 @@ namespace TOKI.Entidade {
         public Almoxarifado() {
         }
 
-        public Almoxarifado(string nome, string endereco, List<Produto> listProduto) {
+        public Almoxarifado(string nome, string endereco) {
             this.nome = nome;
             this.endereco = endereco;
-            this.listProduto = listProduto;
+        }
+
+        public void addItem(string nome, int codigoBarra, TipoUnidade unidade, string tipoProduto, double preco, int id)
+        {
+            Produto a = new Produto(nome, 0, codigoBarra, unidade, tipoProduto, preco, id);
+            this.listProduto.Add(a);
+        }
+
+        public void printProdutos()
+        {
+            foreach(var produto in this.listProduto)
+            {
+                produto.printProduto();
+            }
         }
 
         public void AddMovimento(MovimentoEstoque me)
