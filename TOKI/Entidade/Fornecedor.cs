@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TOKI.Entidade
 {
-    public class Fornecedor:Pessoa
+    public class Fornecedor : Pessoa
     {
         private int cnpj;
         

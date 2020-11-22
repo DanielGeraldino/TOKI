@@ -135,7 +135,7 @@ namespace TOKI.Visualizacao
 
         public bool TelaConsulta()
         {
-            Console.Write("Digiteo o nome do item ou codigo: ");
+            Console.Write("Digiteo o nome do item: ");
             String texto = Console.ReadLine();
 
             Produto p = almoxarifado.pesquisar(texto);
@@ -177,20 +177,31 @@ namespace TOKI.Visualizacao
         {
             Console.WriteLine("Informe o nome do fornecedor: ");
             string nome = Console.ReadLine();
+            
             Console.WriteLine("Informe o CNPJ do fornecedor: ");
             int cnpj = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("Informe um telefone para contato: ");
-            string telefone = Console.ReadLine();
+            int telefone = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("Informe um e-mail para cadastro: ");
             string email = Console.ReadLine();
+            
             Console.WriteLine("Informe o endereço do fornecedor: ");
             string endereco = Console.ReadLine();
+            
             Console.WriteLine("Informe a cidade: ");
             string cidade = Console.ReadLine();
+
             Console.WriteLine("Informe o estado: ");
             string estado = Console.ReadLine();
 
-            return false;
+            almoxarifado.addFornecedor(cnpj, nome, cidade, estado, email, telefone);
+
+            Console.WriteLine("Fornecedor cadastrado!");
+            Console.ReadKey();
+
+            return true;
         }
     }
 }

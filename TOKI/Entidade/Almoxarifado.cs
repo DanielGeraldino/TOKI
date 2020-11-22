@@ -7,8 +7,9 @@ namespace TOKI.Entidade {
     class Almoxarifado : IEstoque {
         private string nome;
         private string endereco;
-        public List<Produto> listProduto = new List<Produto>();
+        private List<Produto> listProduto = new List<Produto>();
         private List<MovimentoEstoque> listMovimento = new List<MovimentoEstoque>();
+        private List<Fornecedor> listFornecedores = new List<Fornecedor>();
 
         public Almoxarifado() {
         }
@@ -16,6 +17,12 @@ namespace TOKI.Entidade {
         public Almoxarifado(string nome, string endereco) {
             this.nome = nome;
             this.endereco = endereco;
+        }
+
+        public void addFornecedor(int cnpj, string nome, string cidade, string estato, string email, int contato)
+        {
+            Fornecedor fornec = new Fornecedor(cnpj, nome, endereco, cidade, estato, email, contato);
+            listFornecedores.Add(fornec);
         }
 
         public void addItem(string nome, int codigoBarra, TipoUnidade unidade, string tipoProduto, double preco, int id)

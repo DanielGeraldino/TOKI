@@ -13,15 +13,6 @@ namespace TOKI
             Tela t = new Tela(a);
 
             t.TelaMenu();
-
-            t.TelaCadastraFornec();
-
-            
-            /*
-
-            a.addItem("teste", 123456, TipoUnidade.UNIDADE, "limpeza", 18.0, 1);
-
-            a.printProdutos();*/
         }
     }
 }
