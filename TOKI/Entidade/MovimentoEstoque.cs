@@ -28,12 +28,14 @@ namespace TOKI.Entidade {
 
         public virtual string descreveMovimento() {
             return
-                "Movimento: " + movimento
+                "------------------------------------------------------------"
+                + "Movimento: " + movimento
                 + "Produto: " + produto.getdrescri()
                 + "/nData de processamento: " + data.ToString()
-                + "/nAlmoxarifado: " + almoxarifado.GetNome() 
-                + "/nquantidade: " + quantidade 
-                + "/nUsuário: " + usuario.nome;
+                + "/nAlmoxarifado: " + almoxarifado.GetNome()
+                + "/nquantidade: " + quantidade
+                + "/nUsuário: " + usuario.nome
+                + "------------------------------------------------------------";
         }
 
 

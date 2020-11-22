@@ -19,6 +19,14 @@ namespace TOKI.Entidade {
             this.endereco = endereco;
         }
 
+        public void printMovimento()
+        {
+            foreach(var mov in listMovimento)
+            {
+                Console.WriteLine(mov.descreveMovimento());
+            }
+        }
+
         public void addFornecedor(int cnpj, string nome, string cidade, string estato, string email, int contato)
         {
             Fornecedor fornec = new Fornecedor(cnpj, nome, endereco, cidade, estato, email, contato);

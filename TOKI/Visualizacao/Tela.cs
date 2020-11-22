@@ -170,7 +170,13 @@ namespace TOKI.Visualizacao
 
         public bool TelaMovimento()
         {
-            return false;
+            Console.WriteLine("-----Movimento de estoque-----");
+
+            almoxarifado.printMovimento();
+
+            Console.WriteLine("-----Movimento de estoque fim-----");
+            Console.ReadKey();
+            return true;
         }
 
         public bool TelaCadastraFornec()
