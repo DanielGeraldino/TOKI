@@ -190,73 +190,140 @@ namespace TOKI.Visualizacao
 
         public bool TelaEntrada()
         {
-            Console.Write("Digite o movimento: ");
-            int mov = int.Parse(Console.ReadLine());
+            //Console.Write("Digite o movimento: ");
+            //int mov = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o nome do produto: ");
-            Produto p = almoxarifado.pesquisar(Console.ReadLine());
-
-            Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
-            DateTime data = Convert.ToDateTime(Console.ReadLine());
+            Console.Write("Digite o id do produto: ");
+            //Produto p = almoxarifado.pesquisar(Console.ReadLine());
+            int idProduto = int.Parse(Console.ReadLine());
+            //Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
+            //DateTime data = Convert.ToDateTime(Console.ReadLine());
 
             Console.Write("Digite a quantidade de entrada: ");
             float quantidade = float.Parse(Console.ReadLine());
-
+            int saldo;
             Console.WriteLine("Informe o fornecedor: ");
-            Fornecedor fornecedor = almoxarifado.pesquisarFornec(Console.ReadLine());
-
-            if (p != null)
+            //Fornecedor fornecedor = almoxarifado.pesquisarFornec(Console.ReadLine());
+            int idFornecedor = int.Parse(Console.ReadLine());
+            string sqlselect = "SELECT descricao,saldo FROM produto WHERE idproduto='" + idProduto + "'";
+            using (var conn = new MySqlConnection("host=localhost;user=root;password=admin;database=toki;"))
             {
-                if (almoxarifado.entrada(mov, p, data, null, quantidade, fornecedor))
+                conn.Open();
+                using (var cmd = new MySqlCommand(sqlselect, conn))
                 {
-                    Console.WriteLine("Movimento registrado");
-                    Console.ReadKey();
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Produto não encontrado!");
-                    Console.ReadKey();
-                    return false;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Você quer mesmo dar entrada a'"+quantidade+"' de saldo ao produto '{0}'?",
+                                             reader["descricao"]);
+                            
+                            Console.WriteLine("[1]Sim\n[2]Não");
+                            int verif1 = int.Parse(Console.ReadLine());
+                            if (verif1 == 1) 
+                            {
+                                string Query = "insert into entradaproduto(id_produto, quantidade, id_fornecedor) values('" + idProduto + "','" + quantidade + "','" + idFornecedor + "');";
+                                string Query3 = "update toki.produto set saldo=saldo+'" + quantidade + "' where idproduto='" + idProduto + "';";
+                                
+                                MySqlCommand Command2 = new MySqlCommand(Query, Conn2);
+                                MySqlCommand Command3 = new MySqlCommand(Query3, Conn2);
+                                MySqlDataReader MyReader2;
+                                
+                                Conn2.Open();
+                                MyReader2 = Command2.ExecuteReader();
+                                
+                                while (MyReader2.Read())
+                                {                      }
+                                Conn2.Close();
+                                Conn2.Open();
+                                MyReader2 = Command3.ExecuteReader();
+                                while (MyReader2.Read()){}
+
+                                Console.WriteLine("Entrada registrada!");
+                                Console.ReadKey();
+                                
+                            }
+                            else { Console.WriteLine("Operação de entrada cancelada");
+                                Console.ReadKey();
+                                Conn2.Close();
+                                return true;
+                            }
+                        }
+                        
+
+                    }
                 }
             }
-
-            Console.ReadKey();
             return false;
         }
 
         public bool TelaSaida()
         {
-            Console.Write("Digite o movimento: ");
-            int mov = int.Parse(Console.ReadLine());
+            //Console.Write("Digite o movimento: ");
+          //  int mov = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o nome do produto: ");
-            Produto p = almoxarifado.pesquisar(Console.ReadLine());
+            Console.Write("Digite o id do produto: ");
+            int idprod=int.Parse(Console.ReadLine());
 
-            Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
-            DateTime data = Convert.ToDateTime(Console.ReadLine());
+           // Console.Write("Digite a data de movimento(ex.: 11/11/2000): ");
+            //DateTime data = Convert.ToDateTime(Console.ReadLine());
 
             Console.Write("Digite a quantidade de saida: ");
             float quantidade = float.Parse(Console.ReadLine());
 
-            if (p != null)
+            string sqlselect = "SELECT descricao,saldo FROM produto WHERE idproduto='" + idprod + "'";
+            using (var conn = new MySqlConnection("host=localhost;user=root;password=admin;database=toki;"))
             {
-                if (almoxarifado.saida(mov, p, data, null, quantidade))
+                conn.Open();
+                using (var cmd = new MySqlCommand(sqlselect, conn))
                 {
-                    Console.WriteLine("Movimento registrado");
-                    Console.ReadKey();
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Saldo insuficiente!");
-                    Console.ReadKey();
-                    return false;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Você quer mesmo dar saida de'" + quantidade + "' do saldo do produto '{0}'?",
+                                             reader["descricao"]);
+
+                            Console.WriteLine("[1]Sim\n[2]Não");
+                            int verif1 = int.Parse(Console.ReadLine());
+                            if (verif1 == 1)
+                            {
+                                string Query = "insert into saidaproduto(idproduto, quantidade) values('" + idprod + "','" + quantidade +"');";
+                                string Query3 = "update toki.produto set saldo=saldo-'" + quantidade + "' where idproduto='" + idprod + "';";
+
+                                MySqlCommand Command2 = new MySqlCommand(Query, Conn2);
+                                MySqlCommand Command3 = new MySqlCommand(Query3, Conn2);
+                                MySqlDataReader MyReader2;
+
+                                Conn2.Open();
+                                MyReader2 = Command2.ExecuteReader();
+
+                                while (MyReader2.Read())
+                                { }
+                                Conn2.Close();
+                                Conn2.Open();
+                                MyReader2 = Command3.ExecuteReader();
+                                while (MyReader2.Read()) { }
+
+                                Console.WriteLine("Saida registrada!");
+                                Console.ReadKey();
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Operação de saida cancelada");
+                                Console.ReadKey();
+                                Conn2.Close();
+                                return true;
+                            }
+                        }
+
+
+                    }
                 }
             }
-
-            Console.WriteLine("Produto não encontrado!");
-            Console.ReadKey();
             return false;
         }
 
