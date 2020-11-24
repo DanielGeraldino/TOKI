@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using TOKI.Entidade;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace TOKI.Visualizacao
 {
     class Tela
     {
-        private Almoxarifado almoxarifado;
 
+        private Almoxarifado almoxarifado;
+        MySqlConnection Conn2 = new MySqlConnection("host=localhost;user=root;password=admin;database=toki;");
         public Tela(Almoxarifado a)
         {
             almoxarifado = a;
@@ -102,11 +105,22 @@ namespace TOKI.Visualizacao
             Console.Write("Digite o preço de venda: ");
             double preco = double.Parse(Console.ReadLine());
 
-            Console.Write("Digite o id: ");
-            int id = int.Parse(Console.ReadLine());
+            //Console.Write("Digite o id: ");
+            //int id = int.Parse(Console.ReadLine());
 
 
-            almoxarifado.addItem(descricao, codigoBarra, unidade, tipo, preco, id);
+            // almoxarifado.addItem(descricao, codigoBarra, unidade, tipo, preco,id);
+
+            string Query = "insert into produto(descricao,codigoBarra,tipounidade,tipo,preco) values('" + descricao + "','" + codigoBarra + "','" + unidade + "','" + tipo + "','" + preco + "');";
+
+            MySqlCommand Command2 = new MySqlCommand(Query, Conn2);
+            MySqlDataReader MyReader2;
+            Conn2.Open();
+            MyReader2 = Command2.ExecuteReader();
+            while (MyReader2.Read())
+            {
+            }
+            Conn2.Close();
 
             Console.WriteLine("Produto cadastrado!");
             Console.ReadKey();
@@ -116,7 +130,7 @@ namespace TOKI.Visualizacao
 
         private TipoUnidade EscolhaUnidade(int escolha)
         {
-            switch(escolha)
+            switch (escolha)
             {
                 case 1:
                     return TipoUnidade.GRAMA;
@@ -140,11 +154,11 @@ namespace TOKI.Visualizacao
 
             Produto p = almoxarifado.pesquisar(texto);
 
-            if(p != null)
+            if (p != null)
             {
                 p.printProduto();
                 Console.ReadKey();
-            } 
+            }
             else
             {
                 Console.WriteLine("produto não encotrado");
@@ -171,13 +185,16 @@ namespace TOKI.Visualizacao
             Console.WriteLine("Informe o fornecedor: ");
             Fornecedor fornecedor = almoxarifado.pesquisarFornec(Console.ReadLine());
 
-            if (p != null) {
-                if (almoxarifado.entrada(mov, p, data, null, quantidade, fornecedor)) {
+            if (p != null)
+            {
+                if (almoxarifado.entrada(mov, p, data, null, quantidade, fornecedor))
+                {
                     Console.WriteLine("Movimento registrado");
                     Console.ReadKey();
                     return true;
                 }
-                else {
+                else
+                {
                     Console.WriteLine("Produto não encontrado!");
                     Console.ReadKey();
                     return false;
@@ -202,14 +219,15 @@ namespace TOKI.Visualizacao
             Console.Write("Digite a quantidade de saida: ");
             float quantidade = float.Parse(Console.ReadLine());
 
-            if(p != null)
+            if (p != null)
             {
-                if(almoxarifado.saida(mov, p, data, null, quantidade))
+                if (almoxarifado.saida(mov, p, data, null, quantidade))
                 {
                     Console.WriteLine("Movimento registrado");
                     Console.ReadKey();
                     return true;
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Saldo insuficiente!");
                     Console.ReadKey();
@@ -237,19 +255,19 @@ namespace TOKI.Visualizacao
         {
             Console.WriteLine("Informe o nome do fornecedor: ");
             string nome = Console.ReadLine();
-            
+
             Console.WriteLine("Informe o CNPJ do fornecedor: ");
             int cnpj = int.Parse(Console.ReadLine());
-            
+
             Console.WriteLine("Informe um telefone para contato: ");
             int telefone = int.Parse(Console.ReadLine());
-            
+
             Console.WriteLine("Informe um e-mail para cadastro: ");
             string email = Console.ReadLine();
-            
+
             Console.WriteLine("Informe o endereço do fornecedor: ");
             string endereco = Console.ReadLine();
-            
+
             Console.WriteLine("Informe a cidade: ");
             string cidade = Console.ReadLine();
 
