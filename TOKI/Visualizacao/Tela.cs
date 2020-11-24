@@ -4,6 +4,7 @@ using System.Text;
 using TOKI.Entidade;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace TOKI.Visualizacao
 {
@@ -28,7 +29,7 @@ namespace TOKI.Visualizacao
             Console.WriteLine("Seja bem-vindo(a) ao Sistema TOKI!");
             Console.WriteLine("Sistema de gerenciamento de estoque");
 
-            Console.WriteLine("\nSelecione uma opção de 1 a n:");
+            Console.WriteLine("\nSelecione uma opção de 1 a 7:");
 
             bool parar = true;
 
@@ -149,15 +150,34 @@ namespace TOKI.Visualizacao
 
         public bool TelaConsulta()
         {
-            Console.Write("Digiteo o nome do item: ");
+            Console.Write("Digite o nome do item: ");
             String texto = Console.ReadLine();
 
             Produto p = almoxarifado.pesquisar(texto);
 
-            if (p != null)
+            if (texto != null)
             {
-                p.printProduto();
-                Console.ReadKey();
+
+                string sql = "SELECT * FROM produto WHERE descricao LIKE'"+texto+"'";
+                using ( var conn = new MySqlConnection("host=localhost;user=root;password=admin;database=toki;"))
+                {
+                    conn.Open();
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                       // cmd.Parameters.AddWithValue("descricao", texto;
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("Descrição: {0} | Codigo de barra: {1} | Saldo: {2} | Tipo de Unidade: {3} | Tipo do produto: {4} | Preço: {5}",
+                                                 reader["descricao"], reader["codigobarra"], reader["saldo"], reader["tipounidade"], reader["tipo"], reader["preco"]);
+                                
+                                
+                            }Console.ReadKey();
+
+                        }
+                    }
+                }
             }
             else
             {
@@ -257,10 +277,10 @@ namespace TOKI.Visualizacao
             string nome = Console.ReadLine();
 
             Console.WriteLine("Informe o CNPJ do fornecedor: ");
-            int cnpj = int.Parse(Console.ReadLine());
+            string cnpj = Console.ReadLine();
 
             Console.WriteLine("Informe um telefone para contato: ");
-            int telefone = int.Parse(Console.ReadLine());
+            string telefone = Console.ReadLine();
 
             Console.WriteLine("Informe um e-mail para cadastro: ");
             string email = Console.ReadLine();
@@ -274,7 +294,18 @@ namespace TOKI.Visualizacao
             Console.WriteLine("Informe o estado: ");
             string estado = Console.ReadLine();
 
-            almoxarifado.addFornecedor(cnpj, nome, cidade, estado, email, telefone);
+
+            string Query = "insert into fornecedor(nome,cnpj,contato,email,endereco,cidade,estado) values('" + nome + "','" + cnpj + "','" + telefone + "','" + email + "','" + endereco + "','" + cidade + "','" + estado + "');";
+
+            MySqlCommand Command2 = new MySqlCommand(Query, Conn2);
+            MySqlDataReader MyReader2;
+            Conn2.Open();
+            MyReader2 = Command2.ExecuteReader();
+            while (MyReader2.Read())
+            {
+            }
+            Conn2.Close();
+            //almoxarifado.addFornecedor(cnpj, nome, cidade, estado, email, telefone);
 
             Console.WriteLine("Fornecedor cadastrado!");
             Console.ReadKey();
